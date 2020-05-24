@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct ListNode {
+    int data;
+    struct ListNode *next;
+};
+
+struct ListNode *createlist(); /*裁判实现，细节不表*/
+struct ListNode *mergelists(struct ListNode *list1, struct ListNode *list2);
+void printlist( struct ListNode *head )
+{
+     struct ListNode *p = head;
+     while (p) {
+           printf("%d ", p->data);
+           p = p->next;
+     }
+     printf("\n");
+}
+
+int main()
+{
+    struct ListNode  *list1, *list2;
+
+    list1 = createlist();
+    list2 = createlist();
+    list1 = mergelists(list1, list2);
+    printlist(list1);
+	
+    return 0;
+}
+
+/* 你的代码将被嵌在这里 */
+struct ListNode *mergelists(struct ListNode *list1, struct ListNode *list2){
+ struct ListNode *p,*q;
+ 
+ 
+ if((list1==NULL)||(list2==NULL)){
+ 	if(list1==NULL)
+ 	return list2;//特殊情况 
+ 	if(list2==NULL)
+ 	return list1;
+ 	if((list1==NULL)&&(list2==NULL))
+ 	return NULL; 
+ }
+ else{
+ p=list1;
+ int temp;
+ while(1){
+ 	if(p->next==NULL) break;
+ 	p=p->next;
+//定位list1的末尾 	
+ }
+//将list1的尾与list2连接,变成一条链 
+p->next=list2;
+
+//对新联进行内部排序
+ for(p=list1;p->next!=NULL;p=p->next)
+    for(q=p->next;q!=NULL;q=q->next){
+    	if(q->data>=p->data){
+    		temp=p->data;
+    		p->data=q->data;
+    		q->data=temp;
+		}
+    		}
+return list1;
+}
+}
